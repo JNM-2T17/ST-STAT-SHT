@@ -157,6 +157,20 @@ public class DiceSet {
 	}
 	
 	/**
+	* returns the sum of these dice
+	* @return the sum of these dice
+	*/
+	public int getSum() {
+		int sum = 0;
+		
+		for( Die die: dice ) {
+			sum += die.getValue();
+		}
+		
+		return sum;
+	}
+	
+	/**
 	* registers a view
 	* @param gamePanel view to register
 	*/

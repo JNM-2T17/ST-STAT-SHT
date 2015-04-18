@@ -14,15 +14,23 @@ import yahtzee.view.ScorePanel;
  * @author Marc San Pedro
  */
 public class PatternFinder {
-    private static PatternFinder instance = new PatternFinder();
+    private static PatternFinder instance = null;
     private DiceSet diceSet;
     private ScorePanel scorePanel;
     
-    private PatternFinder(){
+    private PatternFinder() {
         diceSet = new DiceSet();
         scorePanel = new ScorePanel();
     }
     
+	public PatternFinder getInstance() {
+		if( instance == null ) {
+			instance = new PatternFinder();
+		}
+		
+		return instance;
+	}
+	
     public void setDice(DiceSet ds){
         this.diceSet = ds;
     }
@@ -62,7 +70,7 @@ public class PatternFinder {
         } else if( distribution[1] == 1 && distribution[2] == 1 
 					&& distribution[3] == 1 && distribution[4] == 1 ){
             hasSS = true;
-            if( distribution[0] == 1 || distribution[5] == 1 ) {}
+            if( distribution[0] == 1 || distribution[5] == 1 ) {
                 hasLS = true;
 			}
         } else if( distribution[2] == 1 && distribution[3] == 1 && 
@@ -73,34 +81,19 @@ public class PatternFinder {
 			}
         }
         
-        if( distribCount[0] >= 3 || distribCount[1] >= 3 || distribCount[2] >= 3 
-				|| distribCount[3] >= 3 || distribCount[4] >= 3 
-				|| distribCount[5] >= 3 ) {
+        if( distribCount[3] == 1 ) {
             lower.put(ScoreCard.THREE_OF_A_KIND, sum);
 		} else {
 			lower.put(ScoreCard.THREE_OF_A_KIND, 0 );
 		}
 		
-        if( distribCount[0] >= 4 || distribCount[1] >= 4 || distribCount[2] >= 4 
-				|| distribCount[3] >= 4 || distribCount[4] >= 4 
-				|| distribCount[5] >= 4 ) {
+        if( distribCount[4] == 1 ) {
             lower.put(ScoreCard.FOUR_OF_A_KIND, sum);
 		} else {
 			lower.put(ScoreCard.FOUR_OF_A_KIND, 0 );
 		}
 		
-		boolean hasPair = false;
-		boolean hasTriple = false;
-		
-		for( int i = 0; ( !hasPair || !hasTriple ) && i < 6; i++ ) {
-			if( !hasPair && distribCount[i] == 2 ) {
-				hasPair = true;
-			} else if( !hasTriple && distribCount[i] ==  3) {
-				hasTriple = true;
-			}
-		}
-		
-        if( hasPair && hasTriple ) {
+		if( distribCount[2] == 1 && distribCount[3] == 1 ) {
             lower.put(ScoreCard.FULL_HOUSE, 25);
 		} else {
 			lower.put(ScoreCard.FULL_HOUSE, 0 );
@@ -114,9 +107,7 @@ public class PatternFinder {
             lower.put(ScoreCard.LARGE_STRAIGHT, 40);
 		}
 		
-        if( distribCount[0] == 5 || distribCount[1] == 5 || distribCount[2] == 5 
-				|| distribCount[3] == 5 || distribCount[4] == 5 
-				|| distribCount[5] == 5 ) {
+        if( distribCount[5] == 1 ) {
             lower.put(ScoreCard.YAHTZEE, 50);
 		} else {
 			lower.put(ScoreCard.YAHTZEE, 0 );

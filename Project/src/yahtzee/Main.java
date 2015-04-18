@@ -3,6 +3,8 @@ package yahtzee;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import yahtzee.controller.Controller;
+
 public class Main {
 	public static void main( String[] args ) {
 		try {
@@ -15,5 +17,7 @@ public class Main {
 		} catch( Exception e ) {
 			e.printStackTrace();
 		}
+		
+		new Controller();
 	}
 }
