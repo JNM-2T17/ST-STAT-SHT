@@ -7,82 +7,152 @@ import java.util.Scanner;
 public class AdvisorModel {
 
 	public static String calculateLargeStraightProbability(DiceSet diceSet, int rerollNo){
+		String out = "The probability of rolling a Large Straight is ";
 		
-		return null;
-	}
-	
-	public static String calculateSmallStraightProbability(DiceSet diceSet, int rerollNo){
-		String out = "The probability of rolling a Small Straight is ";
-		
+                int[] dist = diceSet.getDistribution();
+                
+                int[] dices = new int[6];
+                    
+                for(int i=0; i < 6; i++)
+                {
+                    if(dist[i] != 0)
+                    dices[i]++;                     
+                }
+                
+                if(dices[0] == 1 && dices[1] == 1 && dices[2] == 1 && dices[3] == 1 && dices[4] == 1)
+                    return "Your rolled a Large Straight";
+                if(dices[1] == 1 && dices[2] == 1 && dices[3] == 1 && dices[4] == 1 && dices[5] == 1)
+                    return "Your rolled a Large Straight";
+                
+                if(dices[0] == 1 && dices[5] == 1)
+                {
+                    int former = dices[0] + dices[1] + dices[2];
+                    int latter = dices[3] + dices[4] + dices[5];
+                    
+                    if(former < latter)
+                    {
+                        dices[0] = 0;
+                    }
+                    else
+                    {
+                        dices[5] = 0;
+                    }
+                    
+                }
+                String rerolling = "re-rolling dice: ";
+                    
+                int rerolls  = 0;
+                int keepers = 0;
+                    
+                for(int i=0; i < 6; i++)
+                {
+                    //System.out.println(dices[i]);
+                    int x = dist[i] - dices[i];
+                    rerolls += x;
+                    keepers += dices[i];
+                     
+                    while(x != 0)
+                    {
+                        rerolling += i+1 + " ";
+                        x--;
+                    }
+                }
+                
+                
 		if(rerollNo==1)
 		{
                     
                     
 		}
+                
 		else if(rerollNo==2)
 		{
-                    int[] dist = diceSet.getDistribution();
+                    int exponent = 5 - keepers;
+                    double prob = Math.pow(1.0/6, exponent);
+                        
+                    out += prob + " ";
+                    out += rerolling;
+                    
+                }
                 
-                    int[] dices = new int[6];
-                    
-                    for(int i=0; i < 6; i++)
-                    {
-                        if(dist[i] != 0)
-                            dices[i]++;                     
-                    }
-                
-                    if(dices[0] == 1 && dices[1] == 1 && dices[2] == 1 && dices[3] == 1)
-                        return "Your rolled a Small Straight";
-                    if(dices[1] == 1 && dices[2] == 1 && dices[3] == 1 && dices[4] == 1)
-                        return "Your rolled a Small Straight";
-                    if(dices[2] == 1 && dices[3] == 1 && dices[4] == 1 && dices[5] == 1)
-                        return "Your rolled a Small Straight";
-                    
-                    
-                    if(dices[0] == 1 && dices[5] == 1 || dices[1] == 1 && dices[5] == 1 || dices[0] == 1 && dices[4] == 1)
-                    {
-                        int former = dices[0] + dices[1] + dices[2];
-                        int latter = dices[3] + dices[4] + dices[5];
-                        
-                        if(former < latter)
-                        {
-                            dices[0] = 0;
-                            dices[1] = 0;
-                        }
-                        else
-                        {
-                            dices[5] = 0;
-                            dices[4] = 0;
-                        }
-                        
-                    }
-
-                    String rerolling = "re-rolling dice: ";
-                    
-                    int rerolls  = 0;
-                    int keepers = 0;
-                    
-                    for(int i=0; i < 6; i++)
-                    {
-                     //System.out.println(dices[i]);
-                     int x = dist[i] - dices[i];
-                     rerolls += x;
-                     keepers += dices[i];
-                     
-                     while(x != 0)
-                     {
-                         rerolling += i+1 + " ";
-                         x--;
-                     }
-                    }
-                        int exponent = 4 - keepers;
-                        double prob = Math.pow(1.0/6, exponent);
-                        
-                        out += prob + " ";
-			out += rerolling;
-			
-		}
+                return out;
+	}
+	
+	public static String calculateSmallStraightProbability(DiceSet diceSet, int rerollNo){
+		String out = "The probability of rolling a Small Straight is ";
 		
+                int[] dist = diceSet.getDistribution();
+                
+                int[] dices = new int[6];
+                    
+                for(int i=0; i < 6; i++)
+                {
+                    if(dist[i] != 0)
+                    dices[i]++;                     
+                }
+                
+                if(dices[0] == 1 && dices[1] == 1 && dices[2] == 1 && dices[3] == 1)
+                    return "Your rolled a Small Straight";
+                if(dices[1] == 1 && dices[2] == 1 && dices[3] == 1 && dices[4] == 1)
+                    return "Your rolled a Small Straight";
+                if(dices[2] == 1 && dices[3] == 1 && dices[4] == 1 && dices[5] == 1)
+                    return "Your rolled a Small Straight";
+                    
+                    
+                if(dices[0] == 1 && dices[5] == 1 || dices[1] == 1 && dices[5] == 1 || dices[0] == 1 && dices[4] == 1)
+                {
+                    int former = dices[0] + dices[1] + dices[2];
+                    int latter = dices[3] + dices[4] + dices[5];
+                        
+                    if(former < latter)
+                    {
+                        dices[0] = 0;
+                        dices[1] = 0;
+                    }
+                    else
+                    {
+                        dices[5] = 0;
+                        dices[4] = 0;
+                    }
+                        
+                }
+
+                String rerolling = "re-rolling dice: ";
+                    
+                int rerolls  = 0;
+                int keepers = 0;
+                    
+                for(int i=0; i < 6; i++)
+                {
+                    //System.out.println(dices[i]);
+                    int x = dist[i] - dices[i];
+                    rerolls += x;
+                    keepers += dices[i];
+                     
+                    while(x != 0)
+                    {
+                        rerolling += i+1 + " ";
+                        x--;
+                    }
+                }
+                
+                
+		if(rerollNo==1)
+		{
+                    
+                    
+		}
+                
+		else if(rerollNo==2)
+		{
+                    int exponent = 4 - keepers;
+                    double prob = Math.pow(1.0/6, exponent);
+                        
+                    out += prob + " ";
+                    out += rerolling;
+                    
+                }
+                
                 return out;
 	}
 	
@@ -320,6 +390,8 @@ public class AdvisorModel {
             int[] values = new int[5];
             for(int i=0; i<5; i++) values[i] = sc.nextInt();
             ds.setDice(values);
+            System.out.println("reroll #1 " + calculateLargeStraightProbability(ds,1));
+            System.out.println("reroll #2 " + calculateLargeStraightProbability(ds,2));
             System.out.println("reroll #1 " + calculateSmallStraightProbability(ds,1));
             System.out.println("reroll #2 " + calculateSmallStraightProbability(ds,2));
             System.out.println(calculateYahtzeeProbability(ds, 1));
