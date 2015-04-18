@@ -27,20 +27,18 @@ public class PatternFinder {
         this.diceSet = ds;
     }
     
-//    public void setKeepers(boolean[] keepers){
-//        diceSet.setKeepers(keepers);
-//    }
-    
     public Map<String, Integer> getUpper(){
         Map<String, Integer> upper = new HashMap<String, Integer>();
         int[] distribution = diceSet.getDistribution();
-        upper.put(ScoreCard.ACES, distribution[0]);
-        upper.put(ScoreCard.TWOS, distribution[1]*2);
-        upper.put(ScoreCard.THREES, distribution[2]*3);
-        upper.put(ScoreCard.FOURS, distribution[3]*4);
-        upper.put(ScoreCard.FIVES, distribution[4]*5);
-        upper.put(ScoreCard.SIXES, distribution[5]*6);
-        return upper;
+        
+		upper.put(ScoreCard.ACES, distribution[0]);
+        upper.put(ScoreCard.TWOS, distribution[1] * 2);
+        upper.put(ScoreCard.THREES, distribution[2] * 3);
+        upper.put(ScoreCard.FOURS, distribution[3] * 4);
+        upper.put(ScoreCard.FIVES, distribution[4] * 5);
+        upper.put(ScoreCard.SIXES, distribution[5] * 6);
+        
+		return upper;
     }
     
     public Map<String, Integer> getLower(){
@@ -55,34 +53,78 @@ public class PatternFinder {
         
         boolean hasSS = false;
         boolean hasLS = false;
-        if(distribution[0]==1 && distribution[1]==1 && distribution[2]==1 && distribution[3]==1){
+        if( distribution[0] == 1 && distribution[1] == 1 && distribution[2] == 1
+				&& distribution[3] == 1 ) {
                 hasSS = true;
-            if(distribution[4]==1)
+            if( distribution[4] == 1 ) {
                 hasLS = true;
-        } else if(distribution[1]==1 && distribution[2]==1 && distribution[3]==1 && distribution[4]==1){
+			}
+        } else if( distribution[1] == 1 && distribution[2] == 1 
+					&& distribution[3] == 1 && distribution[4] == 1 ){
             hasSS = true;
-            if(distribution[0]==1 || distribution[5]==1)
+            if( distribution[0] == 1 || distribution[5] == 1 ) {}
                 hasLS = true;
-        } else if(distribution[2]==1 && distribution[3]==1 && distribution[4]==1 && distribution[5]==1){
+			}
+        } else if( distribution[2] == 1 && distribution[3] == 1 && 
+					distribution[4] == 1 && distribution[5] == 1 ) {
             hasSS = true;
-            if(distribution[1]==1)
+            if( distribution[1] == 1 ) {
                 hasLS = true;
+			}
         }
         
-        if(distribCount[3]>=1)
+        if( distribCount[0] >= 3 || distribCount[1] >= 3 || distribCount[2] >= 3 
+				|| distribCount[3] >= 3 || distribCount[4] >= 3 
+				|| distribCount[5] >= 3 ) {
             lower.put(ScoreCard.THREE_OF_A_KIND, sum);
-        if(distribCount[4]>=1)
+		} else {
+			lower.put(ScoreCard.THREE_OF_A_KIND, 0 );
+		}
+		
+        if( distribCount[0] >= 4 || distribCount[1] >= 4 || distribCount[2] >= 4 
+				|| distribCount[3] >= 4 || distribCount[4] >= 4 
+				|| distribCount[5] >= 4 ) {
             lower.put(ScoreCard.FOUR_OF_A_KIND, sum);
-        if(distribCount[2]==1 && distribCount[3]==1)
+		} else {
+			lower.put(ScoreCard.FOUR_OF_A_KIND, 0 );
+		}
+		
+		boolean hasPair = false;
+		boolean hasTriple = false;
+		
+		for( int i = 0; ( !hasPair || !hasTriple ) && i < 6; i++ ) {
+			if( !hasPair && distribCount[i] == 2 ) {
+				hasPair = true;
+			} else if( !hasTriple && distribCount[i] ==  3) {
+				hasTriple = true;
+			}
+		}
+		
+        if( hasPair && hasTriple ) {
             lower.put(ScoreCard.FULL_HOUSE, 25);
-        if(hasSS)
+		} else {
+			lower.put(ScoreCard.FULL_HOUSE, 0 );
+		}
+		
+        if(hasSS) {
             lower.put(ScoreCard.SMALL_STRAIGHT, 30);
-        if(hasLS)
+		}
+		
+        if(hasLS) {
             lower.put(ScoreCard.LARGE_STRAIGHT, 40);
-        if(distribCount[5]==1)
+		}
+		
+        if( distribCount[0] == 5 || distribCount[1] == 5 || distribCount[2] == 5 
+				|| distribCount[3] == 5 || distribCount[4] == 5 
+				|| distribCount[5] == 5 ) {
             lower.put(ScoreCard.YAHTZEE, 50);
+		} else {
+			lower.put(ScoreCard.YAHTZEE, 0 );
+		}
+		
         lower.put(ScoreCard.CHANCE, sum);
-        return lower;
+        
+		return lower;
     }
     
     /**
@@ -90,7 +132,6 @@ public class PatternFinder {
     * @param view view to notify
     */
     public void registerView( IView view ) {
-
+		scorePanel = (ScorePanel)view;
     }
-
 }

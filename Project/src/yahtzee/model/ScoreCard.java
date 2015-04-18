@@ -68,30 +68,31 @@ public class ScoreCard {
 	* @return singleton instance of scorecard
 	*/
 	public static ScoreCard getInstance() {
-            if(scorecard == null)
-                scorecard = new ScoreCard();
-            
-            return scorecard;
+		if(scorecard == null) {
+			scorecard = new ScoreCard();
+		}
+		
+		return scorecard;
 	}
 	
 	/**
 	* resets all rows to zero
 	*/
 	public void reset() {
-            aces = 0;
-            twos = 0;
-            threes = 0;
-            fours = 0;
-            fives = 0;
-            sixes = 0;
-            threeOfAKind = 0;
-            fourOfAKind = 0;
-            fullHouse = 0;
-            smallStraight = 0;
-            largeStraight = 0;
-            yahtzee = 0;
-            chance = 0;
-            extraYahtzee = 0;
+		aces = 0;
+		twos = 0;
+		threes = 0;
+		fours = 0;
+		fives = 0;
+		sixes = 0;
+		threeOfAKind = 0;
+		fourOfAKind = 0;
+		fullHouse = 0;
+		smallStraight = 0;
+		largeStraight = 0;
+		yahtzee = 0;
+		chance = 0;
+		extraYahtzee = 0;
 	}
 	
 	/**
@@ -100,72 +101,67 @@ public class ScoreCard {
 	* @param dice dice to get score from
 	*/
 	public void set( String row, DiceSet dice ) {
-		//use getDistribution to determine the score
-		//see DiceSet documentation
-
-                if(row.equals(ACES))
-                {
-                    aces = 1 * dice.getDistribution()[0];                    
-                }
-                else if(row.equals(TWOS))
-                {
-                    twos = 2 * dice.getDistribution()[1];  
-                }
-                else if(row.equals(THREES))
-                {
-                    threes = 3 * dice.getDistribution()[2];
-                }
-                else if(row.equals(FOURS))
-                {
-                    fours = 4 * dice.getDistribution()[3];
-                }
-                else if(row.equals(FIVES))
-                {
-                    fives = 5 * dice.getDistribution()[4];
-                }
-                else if(row.equals(SIXES))
-                {
-                     sixes = 6 * dice.getDistribution()[5];
-                }
-                else if(row.equals(THREE_OF_A_KIND))
-                {
-                    threeOfAKind = dice.getDistribution()[0] + 2 * dice.getDistribution()[1] + 3 * dice.getDistribution()[2]
-                            + 4 * dice.getDistribution()[3] + 5 * dice.getDistribution()[4] + 6 * dice.getDistribution()[5];           
-                }
-                else if(row.equals(FOUR_OF_A_KIND))
-                {
-                    fourOfAKind = dice.getDistribution()[0] + 2 * dice.getDistribution()[1] + 3 * dice.getDistribution()[2]
-                            + 4 * dice.getDistribution()[3] + 5 * dice.getDistribution()[4] + 6 * dice.getDistribution()[5];
-                }
-                else if(row.equals(FULL_HOUSE))
-                {
-                    fullHouse = 25;
-                }
-                else if(row.equals(SMALL_STRAIGHT))
-                {
-                    smallStraight = 30;
-                }
-                else if(row.equals(LARGE_STRAIGHT))
-                {
-                    largeStraight = 40;
-                }
-                else if(row.equals(YAHTZEE))
-                {
-                    if(yahtzee == 50)
-                    {
-                        extraYahtzee = 100;
-                    }
-                    else
-                    {
-                        yahtzee = 50;
-                    }
-                }
-                else if(row.equals(CHANCE))
-                {
-                    chance = dice.getDistribution()[0] + 2 * dice.getDistribution()[1] + 3 * dice.getDistribution()[2]
-                            + 4 * dice.getDistribution()[3] + 5 * dice.getDistribution()[4] + 6 * dice.getDistribution()[5];
-                }
-                
+		switch( row ) {
+			case ACES:
+				aces = dice.getDistribution()[0];    
+				break;
+			case TWOS:
+				twos = 2 * dice.getDistribution()[1];  
+				break;
+			case THREES:
+				threes = 3 * dice.getDistribution()[2];
+				break;
+			case FOURS:
+				fours = 4 * dice.getDistribution()[3];
+				break;
+			case FIVES:
+				fives = 5 * dice.getDistribution()[4];
+				break;
+			case SIXES:
+				sixes = 6 * dice.getDistribution()[5];
+				break;
+			case THREE_OF_A_KIND:
+				threeOfAKind = dice.getDistribution()[0] + 2 
+								* dice.getDistribution()[1] + 3 
+								* dice.getDistribution()[2] + 4
+								* dice.getDistribution()[3] + 5
+								* dice.getDistribution()[4] + 6
+								* dice.getDistribution()[5];          
+				break;
+			case FOUR_OF_A_KIND:
+				fourOfAKind = dice.getDistribution()[0] + 2 
+								* dice.getDistribution()[1] + 3 
+								* dice.getDistribution()[2] + 4
+								* dice.getDistribution()[3] + 5
+								* dice.getDistribution()[4] + 6
+								* dice.getDistribution()[5];
+				break;
+			case FULL_HOUSE:
+				fullHouse = 25;
+				break;
+			case SMALL_STRAIGHT:
+				smallStraight = 30;
+				break;
+			case LARGE_STRAIGHT:
+				largeStraight = 40;
+				break;
+			case YAHTZEE:
+				if(yahtzee == 50) {
+					extraYahtzee += 100;
+				} else {
+					yahtzee = 50;
+				}
+				break;
+			case CHANCE:
+				chance = dice.getDistribution()[0] + 2 
+							* dice.getDistribution()[1] + 3 
+							* dice.getDistribution()[2] + 4
+							* dice.getDistribution()[3] + 5
+							* dice.getDistribution()[4] + 6
+							* dice.getDistribution()[5];
+				break;
+			default:
+		}
 	}
 	
 	/**
@@ -174,57 +170,51 @@ public class ScoreCard {
 	*/
 	public void extraYahtzee(String row, DiceSet dice) {
             
-            int total = dice.getDistribution()[0] + 2 * dice.getDistribution()[1] + 3 * dice.getDistribution()[2]
-                            + 4 * dice.getDistribution()[3] + 5 * dice.getDistribution()[4] + 6 * dice.getDistribution()[5];
-            
-            if(row.equals(ACES))
-            {
-                aces = total;
-            }
-            else if(row.equals(TWOS))
-            {
-                twos = total;
-            }
-            else if(row.equals(THREES))
-            {
-                threes = total;
-            }
-            else if(row.equals(FOURS))
-            {
-                fours = total;
-            }
-            else if(row.equals(FIVES))
-            {
-                fives = total;
-            }
-            else if(row.equals(SIXES))
-            {
-                sixes = total;
-            }
-            else if(row.equals(THREE_OF_A_KIND))
-            {
-                threeOfAKind = total;
-            }
-            else if(row.equals(FOUR_OF_A_KIND))
-            {
-                fourOfAKind = total;
-            }
-            else if(row.equals(FULL_HOUSE))
-            {
-                fullHouse = 25;
-            }
-            else if(row.equals(SMALL_STRAIGHT))
-            {
-                smallStraight = 30;
-            }
-            else if(row.equals(LARGE_STRAIGHT))
-            {
-                largeStraight = 40;
-            }
-            else if(row.equals(CHANCE))
-            {
-                chance = total;
-            }
+		int total = dice.getDistribution()[0] + 2 * dice.getDistribution()[1] 
+						+ 3 * dice.getDistribution()[2] + 4 
+						* dice.getDistribution()[3] + 5 
+						* dice.getDistribution()[4] + 6 
+						* dice.getDistribution()[5];
+		
+		switch( row ) {
+			case ACES:
+				aces = total;
+				break;
+			case TWOS:
+				twos = total;
+				break;
+			case THREES:
+				threes = total;
+				break;
+			case FOURS:
+				fours = total;
+				break;
+			case FIVES:
+				fives = total;
+				break;
+			case SIXES:
+				sixes = total;
+				break;
+			case THREE_OF_A_KIND:
+				threeOfAKind = total;
+				break;
+			case FOUR_OF_A_KIND:
+				fourOfAKind = total;
+				break;
+			case FULL_HOUSE:
+				fullHouse = 25;
+				break;
+			case SMALL_STRAIGHT:
+				smallStraight = 30;
+				break;
+			case LARGE_STRAIGHT:
+				largeStraight = 40;
+				break;
+			case CHANCE:
+				chance = total;
+				break;
+			default:
+		}
 	}
 	
 	/**
@@ -233,61 +223,37 @@ public class ScoreCard {
 	* @return value of desired row
 	*/
 	public int get( String row ) {
+        switch( row ) {
+			case ACES:
+				return aces;
+			case TWOS:
+				return twos;
+			case THREES:
+				return threes;
+			case FOURS:
+				return fours;
+			case FIVES:
+				return fives;
+			case SIXES:
+				return sixes;
+			case THREE_OF_A_KIND:
+				return threeOfAKind;
+			case FOUR_OF_A_KIND:
+				return fourOfAKind;
+			case FULL_HOUSE:
+				return fullHouse;
+			case SMALL_STRAIGHT:
+				return smallStraight;
+			case LARGE_STRAIGHT:
+				return largeStraight;
+			case YAHTZEE:
+				return yahtzee;
+			case CHANCE:
+				return chance;
+			default:
+		}    
             
-            if(row.equals(ACES))
-            {
-                return aces;
-            }
-            else if(row.equals(TWOS))
-            {
-                return twos;
-            }
-            else if(row.equals(THREES))
-            {
-                return threes;
-            }
-            else if(row.equals(FOURS))
-            {
-                return fours;
-            }
-            else if(row.equals(FIVES))
-            {
-                return fives;
-            }
-            else if(row.equals(SIXES))
-            {
-                return sixes;
-            }
-            else if(row.equals(THREE_OF_A_KIND))
-            {
-                return threeOfAKind;
-            }
-            else if(row.equals(FOUR_OF_A_KIND))
-            {
-                return fourOfAKind;
-            }
-            else if(row.equals(FULL_HOUSE))
-            {
-                return fullHouse;
-            }
-            else if(row.equals(SMALL_STRAIGHT))
-            {
-                return smallStraight;
-            }
-            else if(row.equals(LARGE_STRAIGHT))
-            {
-                return largeStraight;
-            }
-            else if(row.equals(YAHTZEE))
-            {
-                return yahtzee;
-            }
-            else if(row.equals(CHANCE))
-            {
-                return chance;
-            }
-            
-            return 0;
+		return 0;
 	}
 	
 	/**
@@ -296,13 +262,12 @@ public class ScoreCard {
 	*/
 	public int getBonus() {
             
-            int upper = aces + twos + threes + fours + fives + sixes;
-            
-            if(upper >= 63)
-            {
-                return 35;
-            }
-            
+		int upper = aces + twos + threes + fours + fives + sixes;
+		
+		if(upper >= 63) {
+			return 35;
+		}
+		
 		return 0;
 	}
 	
@@ -311,7 +276,7 @@ public class ScoreCard {
 	* @return total of upper scorecard
 	*/
 	public int getUpper() {
-		return aces + twos + threes + fours + fives + sixes;
+		return aces + twos + threes + fours + fives + sixes + getBonus();
 	}
 	
 	/**
@@ -319,8 +284,8 @@ public class ScoreCard {
 	* @return total of lower scorecard
 	*/
 	public int getLower() {
-		return threeOfAKind + fourOfAKind + fullHouse + smallStraight +largeStraight + yahtzee 
-                        + extraYahtzee + chance;
+		return threeOfAKind + fourOfAKind + fullHouse + smallStraight 
+				+ largeStraight + yahtzee + extraYahtzee + chance;
 	}
 	
 	/**
@@ -328,8 +293,7 @@ public class ScoreCard {
 	* @return overall score of this card
 	*/
 	public int getTotal() {
-		return aces + twos + threes + fours + fives + sixes + threeOfAKind + fourOfAKind 
-                        + fullHouse + smallStraight + largeStraight + yahtzee + extraYahtzee + chance;
+		return getUpper() + getLower();
 	}
 	
 	/**
