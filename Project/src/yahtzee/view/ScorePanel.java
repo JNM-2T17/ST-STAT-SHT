@@ -65,7 +65,7 @@ public class ScorePanel extends JPanel implements IView {
 				combinations[i] = new LabelPanel( rows[j] );
 				scores[i] = new ScorePanelRow( rows[j], control );
 				scoreMap.put( rows[j], scores[i] );
-				((ScorePanelRow)scores[i]).setButton( 0 );
+				//((ScorePanelRow)scores[i]).setButton( 0 );
 				j++;
 			} else {
 				combinations[i] = new LabelPanel( other[k] );
@@ -164,7 +164,7 @@ public class ScorePanel extends JPanel implements IView {
 					i = lower.get(s);
 				}
 				
-				spr.setModel( i );
+				spr.setButton( i.intValue() );
 			}
 			model2 = pf;
 		}
