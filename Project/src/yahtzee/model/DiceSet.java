@@ -14,6 +14,7 @@ public class DiceSet {
 	private boolean[] keepers; //array of values of dice to not roll
 	private int rollNo;
 	private IView gamePanel; //view
+	private AdvisorModel advisor;
 	
 	/**
 	* basic constructor; randomizes dice
@@ -106,6 +107,9 @@ public class DiceSet {
 		}
 		
 		PatternFinder.getInstance().setDice( this );
+		if( advisor != null ) {
+			advisor.setDiceSet( this );
+		}
 	}
 	
 	/**
@@ -184,6 +188,9 @@ public class DiceSet {
 		}
 		
 		PatternFinder.getInstance().setDice( this );
+		if( advisor != null ) {
+			advisor.setDiceSet( this );
+		}
 	}
 	
 	/**
@@ -219,5 +226,9 @@ public class DiceSet {
 			s += "" + dice[i].getValue() + ( i < 4 ? "\t" : "" );
 		}
 		return s;
+	}
+	
+	public void registerAdvisor( AdvisorModel advisor ) {
+		this.advisor = advisor;
 	}
 }

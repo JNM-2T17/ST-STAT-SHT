@@ -20,6 +20,7 @@ public class AdvisorModel {
 	
 	public void setDiceSet( DiceSet diceSet ) {
 		this.diceSet = diceSet;
+		this.rerollNo = diceSet.getRollNo() - 1;
 		if( view != null ) {
 			view.setModel( this );
 		}
@@ -551,14 +552,37 @@ public class AdvisorModel {
     }*/
 
     public String toString() {
-        String out = "";
-        out += calculateThreeOfAKindProbability() + ".\n";
-        out += calculateFourOfAKindProbability() + ".\n";
-        out += calculateFullHouseProbability() + ".\n";
-        out += calculateSmallStraightProbability() + ".\n";
-        out += calculateLargeStraightProbability() + ".\n";
-        out += calculateYahtzeeProbability() + ".";
-        return out;
+		if( rerollNo > 0 ) {
+			String out = "";
+			ScoreCard sc = ScoreCard.getInstance();
+			if( sc.get( ScoreCard.THREE_OF_A_KIND ) == -1 ) {
+				out += calculateThreeOfAKindProbability() + ".\n";
+			}
+			
+			if( sc.get( ScoreCard.FOUR_OF_A_KIND ) == -1 ) {
+				out += calculateFourOfAKindProbability() + ".\n";
+			}
+			
+			if( sc.get( ScoreCard.FULL_HOUSE ) == -1 ) {
+				out += calculateFullHouseProbability() + ".\n";
+			}
+			
+			if( sc.get( ScoreCard.SMALL_STRAIGHT ) == -1 ) {
+				out += calculateSmallStraightProbability() + ".\n";
+			}
+			
+			if( sc.get( ScoreCard.LARGE_STRAIGHT ) == -1 ) {
+				out += calculateLargeStraightProbability() + ".\n";
+			}
+			
+			if( sc.get( ScoreCard.YAHTZEE ) == -1 ) {
+				out += calculateYahtzeeProbability() + ".";
+			}
+			
+			return out;
+		} else {
+			return "";
+		}
     }
 	
 	public void registerView( IView view ) {
