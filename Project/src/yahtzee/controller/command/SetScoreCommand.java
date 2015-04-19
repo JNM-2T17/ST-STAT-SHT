@@ -25,10 +25,18 @@ public class SetScoreCommand implements ICommand {
 		ScoreCard sc = ScoreCard.getInstance();
 		PatternFinder pf = PatternFinder.getInstance();
 		
-		if( sc.get( ScoreCard.YAHTZEE ) == 50 ) {
-			sc.extraYahtzee( combo, pf.getDice() );
-		} else {
-			sc.set( combo, pf.getDice() );
+		int[] dist = pf.getDice().getDistribution();
+		for( int i : dist ) {
+			if( i == 5 ) {
+				if( sc.get( ScoreCard.YAHTZEE ) == 50 ) {
+					sc.extraYahtzee( combo, pf.getDice() );
+				} else {
+					sc.set( combo, pf.getDice() );
+				}
+				return;
+			}
 		}
+		
+		sc.set( combo, pf.getDice() );
 	}
 }
