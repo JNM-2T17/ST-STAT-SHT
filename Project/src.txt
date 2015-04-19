@@ -16,3 +16,4 @@
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\view\\IView2.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\view\\MainFrame.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\view\\ScorePanel.java"
+"C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\view\\layout\\AGBLayout.java"

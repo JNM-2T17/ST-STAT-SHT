@@ -37,22 +37,24 @@ public class ScoreCard {
 	public static final String YAHTZEE = "Yahtzee";
 	/**constant for Chance row*/
 	public static final String CHANCE = "Chance";
+	/**constant for Extra Yahtzee row*/
+	public static final String EXTRA_YAHTZEE = "Extra Yahtzee";
 	
 	//copy attributes from class diagram
-	private int aces = 0;
-        private int twos = 0;
-        private int threes = 0;
-        private int fours = 0;
-        private int fives = 0;
-        private int sixes = 0;
-        private int threeOfAKind = 0;
-        private int fourOfAKind = 0;
-        private int fullHouse = 0;
-        private int smallStraight = 0;
-        private int largeStraight = 0;
-        private int yahtzee = 0;
-        private int chance = 0;
-        private int extraYahtzee = 0;
+	private int aces;
+	private int twos;
+	private int threes;
+	private int fours;
+	private int fives;
+	private int sixes;
+	private int threeOfAKind;
+	private int fourOfAKind;
+	private int fullHouse;
+	private int smallStraight;
+	private int largeStraight;
+	private int yahtzee;
+	private int chance;
+	private int extraYahtzee;
         
 	private ScorePanel scorePanel; //view
 	
@@ -60,7 +62,20 @@ public class ScoreCard {
 	* instantiates a scorecard, setting all values to zero
 	*/
 	private ScoreCard() {
-            scorecard = new ScoreCard();
+		aces = -1;
+		twos = -1;
+		threes = -1;
+		fours = -1;
+		fives = -1;
+		sixes = -1;
+		threeOfAKind = -1;
+		fourOfAKind = -1;
+		fullHouse = -1;
+		smallStraight = -1;
+		largeStraight = -1;
+		yahtzee = -1;
+		chance = -1;
+		extraYahtzee = 0;
 	}
 	
 	/**
@@ -79,19 +94,19 @@ public class ScoreCard {
 	* resets all rows to zero
 	*/
 	public void reset() {
-		aces = 0;
-		twos = 0;
-		threes = 0;
-		fours = 0;
-		fives = 0;
-		sixes = 0;
-		threeOfAKind = 0;
-		fourOfAKind = 0;
-		fullHouse = 0;
-		smallStraight = 0;
-		largeStraight = 0;
-		yahtzee = 0;
-		chance = 0;
+		aces = -1;
+		twos = -1;
+		threes = -1;
+		fours = -1;
+		fives = -1;
+		sixes = -1;
+		threeOfAKind = -1;
+		fourOfAKind = -1;
+		fullHouse = -1;
+		smallStraight = -1;
+		largeStraight = -1;
+		yahtzee = -1;
+		chance = -1;
 		extraYahtzee = 0;
 	}
 	
@@ -162,6 +177,7 @@ public class ScoreCard {
 				break;
 			default:
 		}
+		scorePanel.setModel( this );
 	}
 	
 	/**
@@ -250,6 +266,8 @@ public class ScoreCard {
 				return yahtzee;
 			case CHANCE:
 				return chance;
+			case EXTRA_YAHTZEE:
+				return extraYahtzee;
 			default:
 		}    
             

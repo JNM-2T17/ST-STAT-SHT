@@ -20,10 +20,9 @@ public class PatternFinder {
     
     private PatternFinder() {
         diceSet = new DiceSet();
-        scorePanel = new ScorePanel();
     }
     
-	public PatternFinder getInstance() {
+	public static PatternFinder getInstance() {
 		if( instance == null ) {
 			instance = new PatternFinder();
 		}
@@ -33,6 +32,7 @@ public class PatternFinder {
 	
     public void setDice(DiceSet ds){
         this.diceSet = ds;
+		scorePanel.setModel( this );
     }
     
     public Map<String, Integer> getUpper(){

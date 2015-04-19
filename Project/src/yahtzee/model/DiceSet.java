@@ -59,6 +59,10 @@ public class DiceSet {
 		throws IllegalArgumentException, 
 			   ArrayIndexOutOfBoundsException {
 		dice[dieIndex].setValue(dieValue);
+		
+		if( gamePanel != null ) {
+			gamePanel.setModel(this); //update view with new die values
+		}
 	}
 	
 	/**
@@ -77,6 +81,10 @@ public class DiceSet {
 		
 		for( int i = 0; i < 5; i++ ) {
 			dice[i].setValue(diceValues[i]); //set each value
+		}
+		
+		if( gamePanel != null ) {
+			gamePanel.setModel(this); //update view with new die values
 		}
 	}
 	

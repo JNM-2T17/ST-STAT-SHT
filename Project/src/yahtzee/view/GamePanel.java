@@ -22,22 +22,30 @@ public class GamePanel extends JPanel implements IView2 {
 	private IController control;
 	
 	private DiePanel[] diePanels;
+	private Box containerBox;
 	private Box contentBox;
 	private JPanel inputPanel;
 	private JButton toggleButton;
 	private JButton executeButton;
 	
-	public GamePanel( DiceSet diceSet ) {
+	public GamePanel( DiceSet diceSet, IController control ) {
 		super( new BorderLayout() );
 		this.model = diceSet;
+		registerController( control );
 		isKeepInput = true;
 		
+		Color darkGreen = new Color(34, 139, 34);
 		Color bg = new Color(0,176,80);
 		Color blue = new Color(79,129,189);
 		
 		setBackground( bg );
 		
 		diePanels = new DiePanel[5];
+		
+		containerBox = Box.createVerticalBox();
+		containerBox.setBackground( darkGreen );
+		containerBox.setOpaque( true );
+		containerBox.add( Box.createVerticalStrut( 40 ) );
 		
 		contentBox = Box.createHorizontalBox();
 		
@@ -46,7 +54,9 @@ public class GamePanel extends JPanel implements IView2 {
 			contentBox.add( diePanels[i] );
 		}
 		
-		add( contentBox, BorderLayout.CENTER );
+		containerBox.add( contentBox );
+		
+		add( containerBox, BorderLayout.CENTER );
 		
 		inputPanel = new JPanel( new FlowLayout( FlowLayout.CENTER ) );
 		inputPanel.setBackground( bg );
@@ -82,7 +92,10 @@ public class GamePanel extends JPanel implements IView2 {
 	
 	
 	public void setModel( Object o ) {
-		
+		this.model = (DiceSet)o;
+		for( int i = 0; i < 5; i++ ) {
+			diePanels[i].setModel( model.getDie(i) );
+		}
 	}
 	
 	public void registerController( IController control ) {
