@@ -50,4 +50,9 @@ public class Controller implements IController {
 	public void executeCommand( ICommand command ) {
 		command.execute();
 	}
+	
+	public void updateAdvisor(DiceSet ds, int rerollNo){
+            advisor.setDiceSet(ds);
+            advisor.setRerollNo(rerollNo);
+        }
 }
