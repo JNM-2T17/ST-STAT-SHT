@@ -450,4 +450,15 @@ public class AdvisorModel {
             System.out.println("");
         }
     }
+
+    public static String getProbabilities(DiceSet ds, int rerollNo){
+        String out = "";
+        out+=calculateThreeOfAKindProbability(ds, rerollNo)+"\n";
+        out+=calculateFourOfAKindProbability(ds, rerollNo)+"\n";
+        out+=calculateFullHouseProbability(ds, rerollNo)+"\n";
+        out+=calculateSmallStraightProbability(ds, rerollNo)+"\n";
+        out+=calculateLargeStraightProbability(ds, rerollNo)+"\n";
+        out+=calculateYahtzeeProbability(ds, rerollNo)+"\n";
+        return out;
+    }
 }
