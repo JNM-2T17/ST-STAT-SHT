@@ -186,7 +186,7 @@ public class ScorePanel extends JPanel implements IView {
 										JOptionPane.YES_NO_OPTION ) 
 			== JOptionPane.YES_OPTION ) {
 			control.executeCommand( new ResetCommand() );
-		} else {
+		} else if( model.isGameFinished() ) {
 			control.executeCommand( new LockCommand() );
 		}
 	}
