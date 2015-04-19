@@ -81,7 +81,27 @@ public class GamePanel extends JPanel implements IView2 {
 		executeButton.setForeground( Color.WHITE );
 		executeButton.addActionListener( new ActionListener() {
 			public void actionPerformed( ActionEvent e ) {
-				
+			public void actionPerformed( ActionEvent e ) {
+	//                            for(int i=0; i<5; i++)
+	//                                System.out.println(diePanels[i].getValue());
+	                            if(diePanels[0].getValue() instanceof Boolean){
+	                                boolean[] keepers = new boolean[5];
+	                                for(int i=0; i<5; i++){
+	                                    keepers[i] = Boolean.valueOf(diePanels[i].getValue()+"");
+	                                }
+	                                RollCommand rc = new RollCommand(model, keepers);
+	                                control.executeCommand(rc);
+	                                control.updateAdvisor(model, 2);
+	                            } else{
+	                                int[] vals = new int[5];
+	                                for(int i=0; i<5; i++){
+	                                    vals[i] = Integer.valueOf(diePanels[i].getValue()+"");
+	                                }
+	                                SetDiceCommand sdc = new SetDiceCommand(model, vals);
+	                                control.executeCommand(sdc);
+	                                control.updateAdvisor(model, 2);
+	                            }
+				}
 			}
 		});
 		inputPanel.add( executeButton );
