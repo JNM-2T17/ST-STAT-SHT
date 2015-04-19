@@ -1,5 +1,5 @@
 dir src\ /s /B | find ".java" > src.txt && java FixSourceFile src.txt && javac -target 1.7 -source 1.7 -cp bin -d bin @src.txt && java -cp bin yahtzee.Main
 
-cd bin && jar cvfm "Yahtzee.jar" manifest.txt yahtzee ..\src && cd ..
+cd bin && jar cvfm "Yahtzee.jar" manifest.txt yahtzee DICE ..\src && cd ..
 
 javadoc -d doc @src.txt
