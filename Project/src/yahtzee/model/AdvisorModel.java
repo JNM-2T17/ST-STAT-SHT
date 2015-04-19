@@ -187,9 +187,9 @@ public class AdvisorModel {
 				out += "13.8889%, "; // 30/216
 			else if(rerolls == 4)
 				out += "8.3333%, "; // 108/1296
-								
-			out += rerolling;
 		}
+		
+		out += rerolling;
                 
 		return out;	
 	}

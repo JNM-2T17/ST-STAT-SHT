@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import yahtzee.controller.IController;
+import yahtzee.controller.command.LockCommand;
 import yahtzee.controller.command.ResetCommand;
 import yahtzee.controller.command.SetScoreCommand;
 import yahtzee.model.PatternFinder;
@@ -185,8 +186,8 @@ public class ScorePanel extends JPanel implements IView {
 										JOptionPane.YES_NO_OPTION ) 
 			== JOptionPane.YES_OPTION ) {
 			control.executeCommand( new ResetCommand() );
-		} else if( model.isGameFinished() ) {
-			System.exit(0);
+		} else {
+			control.executeCommand( new LockCommand() );
 		}
 	}
 	

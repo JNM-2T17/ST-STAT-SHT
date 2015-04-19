@@ -47,6 +47,17 @@ public class DiceSet {
 		}
 	}
 	
+	public void lock() {
+		rollNo = 3;
+		setKeepers( new boolean[]{false,false,false,false,false});
+		if( gamePanel != null ) {
+			gamePanel.setModel(this); //update view with new die values
+		}
+		if( advisor != null ) {
+			advisor.setDiceSet( this );
+		}
+	}
+	
 	/**
 	* initializes attributes
 	*/

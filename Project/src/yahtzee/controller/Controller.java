@@ -33,7 +33,6 @@ public class Controller implements IController {
 		advisorPanel = new AdvisorPanel();
 		advisor.registerView( advisorPanel );
 		advisor.setDiceSet( diceSet );
-		advisor.setRerollNo( 2 );
 		mainFrame.setSouth( advisorPanel );
 		
 		mainFrame.center();
@@ -41,6 +40,7 @@ public class Controller implements IController {
 		patternFinder.registerView( scorePanel );
 		scoreCard.registerView( scorePanel );
 		diceSet.registerView( gamePanel );
+		diceSet.registerAdvisor( advisor );
 	}
 	
 	/**
@@ -50,9 +50,4 @@ public class Controller implements IController {
 	public void executeCommand( ICommand command ) {
 		command.execute();
 	}
-	
-	public void updateAdvisor(DiceSet ds, int rerollNo){
-            advisor.setDiceSet(ds);
-            advisor.setRerollNo(rerollNo);
-        }
 }

@@ -8,6 +8,7 @@
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\model\\AdvisorModel.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\model\\DiceSet.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\model\\Die.java"
+"C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\model\\LockCommand.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\model\\PatternFinder.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\model\\ResetCommand.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\model\\ScoreCard.java"

@@ -33,11 +33,16 @@ public class SetScoreCommand implements ICommand {
 				} else {
 					sc.set( combo, pf.getDice() );
 				}
+				if( !sc.isGameFinished() ) {
+					pf.getDice().reset();
+				}
 				return;
 			}
 		}
 		
 		sc.set( combo, pf.getDice() );
-		pf.getDice().reset();
+		if( !sc.isGameFinished() ) {
+			pf.getDice().reset();
+		}
 	}
 }
