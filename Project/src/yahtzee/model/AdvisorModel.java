@@ -216,6 +216,7 @@ public class AdvisorModel {
 					out += i <= 1 ? "" : ", ";
 					out += diceSet.getDie(i).getValue();
 				}
+				return out;
 			}
             if(max==2) {
                 out += "2.8528% re-rolling dice with values ";
@@ -472,6 +473,7 @@ public class AdvisorModel {
 					out += i <= 1 ? "" : ", ";
 					out += diceSet.getDie(i).getValue();
 				}
+				return out;
 			}
             if(max==2) {
                 out+="22.3037%, re-rolling dice with values ";
@@ -508,6 +510,7 @@ public class AdvisorModel {
 					out += i <= 1 ? "" : ", ";
 					out += diceSet.getDie(i).getValue();
 				}
+				return out;
             } else if(max==2) {
                 out+="7.4074%, re-rolling dice with values ";
             } else if(max==3) {
