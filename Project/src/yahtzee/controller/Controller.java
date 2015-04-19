@@ -20,6 +20,7 @@ public class Controller implements IController {
 		scoreCard = ScoreCard.getInstance();
 		advisor = new AdvisorModel( diceSet );
 		patternFinder = PatternFinder.getInstance();
+		patternFinder.setDice( diceSet );
 		
 		mainFrame = new MainFrame();
 		

@@ -35,7 +35,6 @@ public class DiePanel extends JPanel implements IView {
 	private JPanel actionPanel;
 	private JSpinner valueSpinner;
 	private JButton keepButton;
-	private JButton test;
 	
 	public DiePanel( Die die, int number ) {
 		this.model = die;
@@ -54,6 +53,7 @@ public class DiePanel extends JPanel implements IView {
 		numberPanel = new JPanel( new FlowLayout( FlowLayout.CENTER ) );
 		numberPanel.setBackground( bg );
 		dieNumber = new JLabel( "Die #" + number );
+		dieNumber.setForeground( Color.WHITE );
 		numberPanel.add( dieNumber );
 		contentBox.add( numberPanel );
 		
@@ -84,14 +84,6 @@ public class DiePanel extends JPanel implements IView {
 		contentBox.add( actionPanel );
 		
 		add( contentBox );
-		
-		/*test = new JButton("Toggle");
-		test.addActionListener( new ActionListener() {
-			public void actionPerformed( ActionEvent e ) {
-				toggleInput();
-			}
-		});
-		add( test);*/
 		
 		setModel( die );
 	}

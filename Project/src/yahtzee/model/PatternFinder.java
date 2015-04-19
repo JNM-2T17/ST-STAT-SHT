@@ -30,9 +30,15 @@ public class PatternFinder {
 		return instance;
 	}
 	
+	public DiceSet getDice() {
+		return diceSet;
+	}
+	
     public void setDice(DiceSet ds){
         this.diceSet = ds;
-		scorePanel.setModel( this );
+		if( scorePanel != null ) {
+			scorePanel.setModel( this );
+		}
     }
     
     public Map<String, Integer> getUpper(){

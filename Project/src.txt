@@ -4,6 +4,7 @@
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\controller\\command\\ICommand.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\controller\\command\\RollCommand.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\controller\\command\\SetDiceCommand.java"
+"C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\controller\\command\\SetScoreCommand.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\model\\AdvisorModel.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\model\\DiceSet.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\model\\Die.java"

@@ -12,6 +12,7 @@ import yahtzee.view.IView;
 public class DiceSet {
 	private Die[] dice; //dice 
 	private boolean[] keepers; //array of values of dice to not roll
+	private int rollNo;
 	private IView gamePanel; //view
 	
 	/**
@@ -26,10 +27,11 @@ public class DiceSet {
 	* @param diceValues values of dice
 	* @throws IllegalArgumentException when the number of values is not five
 	*/
-	public DiceSet( int[] diceValues )
+	public DiceSet( int[] diceValues, int rollNo )
 		throws IllegalArgumentException {
 		initComponents(); //initlaize components
 		
+		setRollNo( rollNo );
 		setDice( diceValues ); //set values
 	}
 	
@@ -46,6 +48,22 @@ public class DiceSet {
 			dice[i] = new Die();
 			keepers[i] = false; //no keepers yet
 		}
+	}
+	
+	/**
+	* returns whether it is the 1st, 2nd, or 3rd roll
+	* @return whether it is the 1st, 2nd, or 3rd roll
+	*/
+	public int getRollNo() {
+		return rollNo;
+	}
+	
+	/**
+	* sets whether it is the 1st, 2nd, or 3rd roll
+	* @param rollNo roll number
+	*/
+	public void setRollNo( int rollNo ) {
+		this.rollNo = rollNo;
 	}
 	
 	/**
@@ -86,6 +104,8 @@ public class DiceSet {
 		if( gamePanel != null ) {
 			gamePanel.setModel(this); //update view with new die values
 		}
+		
+		PatternFinder.getInstance().setDice( this );
 	}
 	
 	/**
@@ -162,6 +182,8 @@ public class DiceSet {
 		if( gamePanel != null ) {
 			gamePanel.setModel(this); //update view with new die values
 		}
+		
+		PatternFinder.getInstance().setDice( this );
 	}
 	
 	/**

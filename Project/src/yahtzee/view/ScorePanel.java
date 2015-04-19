@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import yahtzee.controller.IController;
-//import yahtzee.controller.command.SetScoreCommand;
+import yahtzee.controller.command.SetScoreCommand;
 import yahtzee.model.PatternFinder;
 import yahtzee.model.ScoreCard;
 import yahtzee.view.layout.AGBLayout;
@@ -65,7 +65,7 @@ public class ScorePanel extends JPanel implements IView {
 				combinations[i] = new LabelPanel( rows[j] );
 				scores[i] = new ScorePanelRow( rows[j], control );
 				scoreMap.put( rows[j], scores[i] );
-				//((ScorePanelRow)scores[i]).setButton( 0 );
+				((ScorePanelRow)scores[i]).setButton( 0 );
 				j++;
 			} else {
 				combinations[i] = new LabelPanel( other[k] );
@@ -178,6 +178,7 @@ public class ScorePanel extends JPanel implements IView {
 		private JLabel label;
 		
 		public LabelPanel() {
+			super( new FlowLayout( FlowLayout.CENTER ) );
 			initComponents();
 		}
 		
@@ -226,7 +227,7 @@ public class ScorePanel extends JPanel implements IView {
 		private IController control;
 		
 		public ScorePanelRow( String combo, IController control ) {
-			super( new FlowLayout( FlowLayout.RIGHT ) );
+			super( new FlowLayout( FlowLayout.CENTER ) );
 			this.combo = combo;
 			
 			Color blue = new Color(79,129,189);
@@ -236,11 +237,7 @@ public class ScorePanel extends JPanel implements IView {
 			scoreButton = new JButton();
 			scoreButton.setBackground( blue );
 			scoreButton.setForeground( Color.WHITE );
-			scoreButton.addActionListener( new ActionListener() {
-				public void actionPerformed( ActionEvent e ) {
-					
-				}
-			});
+			scoreButton.addActionListener( new SetScoreListener() );
 			scoreButton.setVisible( false );
 			add( scoreButton );
 			registerController( control );
@@ -283,6 +280,12 @@ public class ScorePanel extends JPanel implements IView {
 		
 		public void registerController( IController control ) {
 			this.control = control;
+		}
+		
+		private class SetScoreListener implements ActionListener {
+			public void actionPerformed( ActionEvent e ) {
+				control.executeCommand( new SetScoreCommand( combo ) );
+			}
 		}
 	}
 }
