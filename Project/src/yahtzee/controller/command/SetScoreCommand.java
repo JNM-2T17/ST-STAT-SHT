@@ -38,5 +38,6 @@ public class SetScoreCommand implements ICommand {
 		}
 		
 		sc.set( combo, pf.getDice() );
+		pf.getDice().reset();
 	}
 }

@@ -97,6 +97,12 @@ public class DiePanel extends JPanel implements IView {
 		die6 = new ImageIcon( getClass().getResource( "/DICE/6.png" ) );
 	}
 	
+	public void reset() {
+		keep = false;
+		keepButton.setText( "Keep" );
+		keepButton.setEnabled( false );
+	}
+	
 	public void toggleInput() {
 		if( isKeepInput ) {
 			keepButton.setVisible( false );
@@ -148,5 +154,6 @@ public class DiePanel extends JPanel implements IView {
 		}
 		
 		valueSpinner.setValue( new Integer( model.getValue() ) );
+		keepButton.setEnabled( true );
 	}
 }

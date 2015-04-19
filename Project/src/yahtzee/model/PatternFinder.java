@@ -67,50 +67,59 @@ public class PatternFinder {
         
         boolean hasSS = false;
         boolean hasLS = false;
-        if( distribution[0] == 1 && distribution[1] == 1 && distribution[2] == 1
-				&& distribution[3] == 1 ) {
+        if( distribution[0] >= 1 && distribution[1] >= 1 && distribution[2] >= 1
+				&& distribution[3] >= 1 ) {
                 hasSS = true;
-            if( distribution[4] == 1 ) {
+            if( distribution[4] >= 1 ) {
                 hasLS = true;
 			}
-        } else if( distribution[1] == 1 && distribution[2] == 1 
-					&& distribution[3] == 1 && distribution[4] == 1 ){
+        } else if( distribution[1] >= 1 && distribution[2] >= 1 
+					&& distribution[3] >= 1 && distribution[4] >= 1 ){
             hasSS = true;
-            if( distribution[0] == 1 || distribution[5] == 1 ) {
+            if( distribution[0] >= 1 || distribution[5] >= 1 ) {
                 hasLS = true;
 			}
-        } else if( distribution[2] == 1 && distribution[3] == 1 && 
-					distribution[4] == 1 && distribution[5] == 1 ) {
+        } else if( distribution[2] >= 1 && distribution[3] >= 1 && 
+					distribution[4] >= 1 && distribution[5] >= 1 ) {
             hasSS = true;
-            if( distribution[1] == 1 ) {
+            if( distribution[1] >= 1 ) {
                 hasLS = true;
 			}
         }
         
-        if( distribCount[3] == 1 ) {
+        if( distribCount[3] == 1 || distribCount[4] == 1 
+			|| distribCount[5] == 1 ) {
             lower.put(ScoreCard.THREE_OF_A_KIND, sum);
 		} else {
 			lower.put(ScoreCard.THREE_OF_A_KIND, 0 );
 		}
 		
-        if( distribCount[4] == 1 ) {
+        if( distribCount[4] == 1 || distribCount[5] == 1 ) {
             lower.put(ScoreCard.FOUR_OF_A_KIND, sum);
 		} else {
 			lower.put(ScoreCard.FOUR_OF_A_KIND, 0 );
 		}
 		
-		if( distribCount[2] == 1 && distribCount[3] == 1 ) {
+		if( distribCount[2] == 1 && distribCount[3] == 1 
+				|| distribCount[5] == 1 
+				&& ScoreCard.getInstance().get( ScoreCard.YAHTZEE) == 50 ) {
             lower.put(ScoreCard.FULL_HOUSE, 25);
 		} else {
 			lower.put(ScoreCard.FULL_HOUSE, 0 );
 		}
 		
-        if(hasSS) {
+        if( hasSS || distribCount[5] == 1 
+			&& ScoreCard.getInstance().get( ScoreCard.YAHTZEE) == 50 ) {
             lower.put(ScoreCard.SMALL_STRAIGHT, 30);
+		} else {
+			lower.put(ScoreCard.SMALL_STRAIGHT, 0);
 		}
 		
-        if(hasLS) {
+        if( hasLS || distribCount[5] == 1 
+			&& ScoreCard.getInstance().get( ScoreCard.YAHTZEE) == 50 ) {
             lower.put(ScoreCard.LARGE_STRAIGHT, 40);
+		} else {
+			lower.put(ScoreCard.LARGE_STRAIGHT, 0);
 		}
 		
         if( distribCount[5] == 1 ) {

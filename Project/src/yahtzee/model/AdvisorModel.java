@@ -20,7 +20,7 @@ public class AdvisorModel {
 	
 	public void setDiceSet( DiceSet diceSet ) {
 		this.diceSet = diceSet;
-		this.rerollNo = diceSet.getRollNo() - 1;
+		this.rerollNo = diceSet.getRollNo();
 		if( view != null ) {
 			view.setModel( this );
 		}
@@ -552,7 +552,7 @@ public class AdvisorModel {
     }*/
 
     public String toString() {
-		if( rerollNo > 0 ) {
+		if( rerollNo > 0 && rerollNo < 3 ) {
 			String out = "";
 			ScoreCard sc = ScoreCard.getInstance();
 			if( sc.get( ScoreCard.THREE_OF_A_KIND ) == -1 ) {

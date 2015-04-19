@@ -36,6 +36,17 @@ public class DiceSet {
 		setDice( diceValues ); //set values
 	}
 	
+	public void reset() {
+		rollNo = 0;
+		setKeepers( new boolean[]{false,false,false,false,false});
+		if( gamePanel != null ) {
+			gamePanel.setModel(this); //update view with new die values
+		}
+		if( advisor != null ) {
+			advisor.setDiceSet( this );
+		}
+	}
+	
 	/**
 	* initializes attributes
 	*/
@@ -47,8 +58,8 @@ public class DiceSet {
 		//initialize array values
 		for( int i = 0; i < 5; i++ ) {
 			dice[i] = new Die();
-			keepers[i] = false; //no keepers yet
 		}
+		reset();
 	}
 	
 	/**
@@ -105,6 +116,8 @@ public class DiceSet {
 		if( gamePanel != null ) {
 			gamePanel.setModel(this); //update view with new die values
 		}
+		
+		rollNo++;		
 		
 		PatternFinder.getInstance().setDice( this );
 		if( advisor != null ) {
@@ -182,6 +195,8 @@ public class DiceSet {
 				dice[i].roll(); //roll die
 			}
 		}
+		
+		rollNo++;
 		
 		if( gamePanel != null ) {
 			gamePanel.setModel(this); //update view with new die values

@@ -11,8 +11,10 @@ import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import yahtzee.controller.IController;
+import yahtzee.controller.command.ResetCommand;
 import yahtzee.controller.command.SetScoreCommand;
 import yahtzee.model.PatternFinder;
 import yahtzee.model.ScoreCard;
@@ -65,7 +67,7 @@ public class ScorePanel extends JPanel implements IView {
 				combinations[i] = new LabelPanel( rows[j] );
 				scores[i] = new ScorePanelRow( rows[j], control );
 				scoreMap.put( rows[j], scores[i] );
-				((ScorePanelRow)scores[i]).setButton( 0 );
+				//((ScorePanelRow)scores[i]).setButton( 0 );
 				j++;
 			} else {
 				combinations[i] = new LabelPanel( other[k] );
@@ -160,7 +162,7 @@ public class ScorePanel extends JPanel implements IView {
 			for( String s: rows ) {
 				Integer i = upper.get(s);
 				ScorePanelRow spr = (ScorePanelRow)scoreMap.get(s);
-				if( s == null ) {
+				if( i == null ) {
 					i = lower.get(s);
 				}
 				
@@ -168,10 +170,24 @@ public class ScorePanel extends JPanel implements IView {
 			}
 			model2 = pf;
 		}
+		end();
 	}
 	
 	public void registerController( IController control ) {
 		this.control = control;
+	}
+	
+	
+	public void end() {
+		if( model.isGameFinished() 
+			&& JOptionPane.showConfirmDialog( null, "Game Over! Play Again?", 
+										"Game Over", 
+										JOptionPane.YES_NO_OPTION ) 
+			== JOptionPane.YES_OPTION ) {
+			control.executeCommand( new ResetCommand() );
+		} else if( model.isGameFinished() ) {
+			System.exit(0);
+		}
 	}
 	
 	private class LabelPanel extends JPanel {

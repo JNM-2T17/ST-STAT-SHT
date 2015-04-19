@@ -24,9 +24,9 @@ public class ScoreCard {
 	/**constant for Sixes row*/
 	public static final String SIXES = "Sixes";
 	/**constant for Three of a Kind row*/
-	public static final String THREE_OF_A_KIND = "3oak"; 
+	public static final String THREE_OF_A_KIND = "Three of a Kind"; 
 	/**constant for Four of a Kind row*/
-	public static final String FOUR_OF_A_KIND = "4oak";
+	public static final String FOUR_OF_A_KIND = "Four of a Kind";
 	/**constant for Full House row*/
 	public static final String FULL_HOUSE = "Full House";
 	/**constant for Small Straight row*/
@@ -100,6 +100,9 @@ public class ScoreCard {
 		extraYahtzee = 0;
 		upperOffset = 6;
 		lowerOffset = 7;
+		if( scorePanel != null ) {
+			scorePanel.setModel( this );
+		}
 	}
 	
 	/**
@@ -136,11 +139,11 @@ public class ScoreCard {
 				break;
 			case THREE_OF_A_KIND:
 				dist = dice.getDistribution();
-				for( int i: dist ) {
-					if( i >= 3 ) {
+				for(int i = 0; i < 6; i++ ) {
+					if( dist[i] >= 3 ) {
 						threeOfAKind = dice.getSum();
+						break;
 					}
-					break;
 				}
 				
 				if( threeOfAKind == -1 ) {
@@ -150,11 +153,11 @@ public class ScoreCard {
 				break;
 			case FOUR_OF_A_KIND:
 				dist = dice.getDistribution();
-				for( int i: dist ) {
-					if( i >= 3 ) {
+				for( int i = 0; i < 6; i++ ) {
+					if( dist[i] >= 4 ) {
 						fourOfAKind = dice.getSum();
+						break;
 					}
-					break;
 				}
 				
 				if( fourOfAKind == -1 ) {
@@ -166,10 +169,10 @@ public class ScoreCard {
 				dist = dice.getDistribution();
 				boolean has2 = false;
 				boolean has3 = false;
-				for( int i: dist ) {
-					if( i == 3 ) {
+				for( int i = 0; i < 6; i++ ) {
+					if( dist[i] == 3 ) {
 						has3 = true;
-					} else if( i == 2 ) {
+					} else if( dist[i] == 2 ) {
 						has2 = true;
 					}
 					
@@ -209,11 +212,11 @@ public class ScoreCard {
 				break;
 			case YAHTZEE:
 				dist = dice.getDistribution();
-				for( int i: dist ) {
-					if( i >= 3 ) {
+				for( int i = 0; i < 6; i++ ) {
+					if( dist[i] == 5 ) {
 						yahtzee = 50;
+						break;
 					}
-					break;
 				}
 				
 				if( yahtzee == -1 ) {
@@ -333,6 +336,10 @@ public class ScoreCard {
 		}    
             
 		return 0;
+	}
+	
+	public boolean isGameFinished() {
+		return ( upperOffset + lowerOffset == 0 );
 	}
 	
 	/**
