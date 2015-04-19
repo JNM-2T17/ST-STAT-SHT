@@ -415,8 +415,7 @@ public class AdvisorModel {
 					out += i <= 1 ? "" : ", ";
 					out += diceSet.getDie(i).getValue();
 				}
-			}
-            if(max==2) {
+			} else if (max==2) {
                 out+="66.5102%, re-rolling dice with values ";
                 Iterator<Die> dice = diceSet.getDice();
                 String diceToReRoll = "";
@@ -440,8 +439,8 @@ public class AdvisorModel {
                 for(int i=1; dice.hasNext(); i++) {
                     Die d = dice.next();
                     if(d.getValue()!=valueOfMaxDist) {
-					diceToReRoll += d.getValue() + ", ";
-				}
+						diceToReRoll += d.getValue() + ", ";
+					}
                 }
                 diceToReRoll = diceToReRoll.substring(0, diceToReRoll.length()-2);
                 out += diceToReRoll;
@@ -472,11 +471,9 @@ public class AdvisorModel {
 					out += i <= 1 ? "" : ", ";
 					out += diceSet.getDie(i).getValue();
 				}
-			}
-            if(max==2) {
+			} else if(max==2) {
                 out+="22.3037%, re-rolling dice with values ";
-            }
-            if(max==3) {
+            } else if(max==3) {
                 out+="51.7747%, re-rolling dice with values ";
             }
             Iterator<Die> dice = diceSet.getDice();
@@ -526,30 +523,6 @@ public class AdvisorModel {
         }
         return out;
     }
-        
-    /*public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        while(true){
-            System.out.println("Enter dice values");
-            DiceSet ds = new DiceSet();
-            int[] values = new int[5];
-            for(int i=0; i<5; i++) values[i] = sc.nextInt();
-            ds.setDice(values);
-            System.out.println("reroll #1 " + calculateLargeStraightProbability(ds,1));
-            System.out.println("reroll #2 " + calculateLargeStraightProbability(ds,2));
-            System.out.println("reroll #1 " + calculateSmallStraightProbability(ds,1));
-            System.out.println("reroll #2 " + calculateSmallStraightProbability(ds,2));
-            System.out.println(calculateYahtzeeProbability(ds, 1));
-            System.out.println(calculateYahtzeeProbability(ds, 2));
-            System.out.println(calculateFullHouseProbability(ds, 1));
-            System.out.println(calculateFullHouseProbability(ds, 2));
-            System.out.println(calculateThreeOfAKindProbability(ds, 1));
-            System.out.println(calculateThreeOfAKindProbability(ds, 2));
-            System.out.println(calculateFourOfAKindProbability(ds, 1));
-            System.out.println(calculateFourOfAKindProbability(ds, 2));
-            System.out.println("");
-        }
-    }*/
 
     public String toString() {
 		if( rerollNo > 0 && rerollNo < 3 ) {
