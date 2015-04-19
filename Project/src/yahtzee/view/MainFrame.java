@@ -1,7 +1,7 @@
 package yahtzee.view;
 
 import java.awt.BorderLayout;
-//import java.awt.Color;
+import java.awt.Color;
 //import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,15 +15,20 @@ public class MainFrame extends JFrame {
 		setTitle( "Yahtzee" );
 		setDefaultCloseOperation( EXIT_ON_CLOSE );
 		
+		Color bg = new Color(34, 139, 34);
+		
 		mainPanel = new JPanel();
+		mainPanel.setBackground( bg );
 		//mainPanel.setBorder( BorderFactory.createLineBorder( Color.BLACK ) );
 		add( mainPanel, BorderLayout.CENTER );
 		
 		southPanel = new JPanel();
+		southPanel.setBackground( bg );
 		//southPanel.setBorder( BorderFactory.createLineBorder( Color.BLACK ) );
 		add( southPanel, BorderLayout.SOUTH );
 		
 		eastPanel = new JPanel();
+		eastPanel.setBackground( bg );
 		//eastPanel.setBorder( BorderFactory.createLineBorder( Color.BLACK ) );
 		add( eastPanel, BorderLayout.EAST );
 		

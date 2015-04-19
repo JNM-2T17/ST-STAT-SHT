@@ -12,10 +12,4 @@ public interface IView {
 	* @param o model
 	*/
 	public void setModel( Object o );
-	
-	/**
-	* registers a controller
-	* @param control controller
-	*/
-	public void registerController( IController control );
 }
