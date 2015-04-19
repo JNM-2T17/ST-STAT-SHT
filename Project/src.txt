@@ -9,6 +9,7 @@
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\model\\Die.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\model\\PatternFinder.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\model\\ScoreCard.java"
+"C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\view\\AdvisorPanel.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\view\\IView.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\view\\MainFrame.java"
 "C:\\DLSU\\Term 6\\ST-STAT\\Requirements\\ST-STAT-SHT\\Project\\src\\yahtzee\\view\\ScorePanel.java"
