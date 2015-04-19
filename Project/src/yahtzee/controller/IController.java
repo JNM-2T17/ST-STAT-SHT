@@ -13,4 +13,5 @@ public interface IController {
 	* @param command command to execute
 	*/
 	public void executeCommand( ICommand command );
+        public void updateAdvisor(DiceSet ds, int rerollNo);
 }
