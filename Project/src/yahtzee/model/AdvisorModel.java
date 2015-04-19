@@ -1,7 +1,6 @@
 package yahtzee.model;
 
 import java.util.Iterator;
-import java.util.Scanner;
 import java.text.DecimalFormat;
 import yahtzee.view.IView;
 
@@ -300,7 +299,9 @@ public class AdvisorModel {
                 return out + "55.5556%, re-rolling die with value " + 
 						diceToReRoll;
             } else if(max==1) {
-                out += "7.5482%, re-rolling dice with values 2, 3, 4, 5";
+                Iterator<Die> dice = diceSet.getDice();
+                out+="7.5482%, re-rolling dice with values "+dice.next().getValue()+", "+dice.next().getValue()+", "+
+                                                                dice.next().getValue()+", "+dice.next().getValue();
                 return out;
             } else if(max==2) {
                 out += "14.4676%, re-rolling dice with values ";
@@ -420,7 +421,7 @@ public class AdvisorModel {
                 String diceToReRoll = "";
                 for(int i=1; dice.hasNext(); i++) {
                     Die d = dice.next();
-                    if(d.getValue()!=valueOfMaxDist) diceToReRoll += i+", ";
+                    if(d.getValue()!=valueOfMaxDist) diceToReRoll += (d.getValue())+", ";
                 }
                 diceToReRoll = diceToReRoll.substring(0, diceToReRoll.length()-2);
                 out += diceToReRoll;
@@ -428,7 +429,9 @@ public class AdvisorModel {
         }
         if(rerollNo==2) {
             if(max==1) {
-                out+="13.1944%, re-rolling dice with values 2, 3, 4, 5";
+                Iterator<Die> dice = diceSet.getDice();
+                out+="13.1944%, re-rolling dice with values "+dice.next().getValue()+", "+dice.next().getValue()+", "+
+                                                                dice.next().getValue()+", "+dice.next().getValue();
             } else if(max==2) {
                 out+="42.1296%, re-rolling dice with values ";
                 Iterator<Die> dice = diceSet.getDice();
